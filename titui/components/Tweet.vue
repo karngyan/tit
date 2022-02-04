@@ -1,7 +1,7 @@
 <template>
 <div>
   <div class="shadow-md border border-zinc-800 rounded-md p-4">
-    <div class="text-sm text-zinc-300">
+    <div class="text-sm whitespace-pre text-zinc-300">
       {{ tweet.content }}
     </div>
     <div class="flex pt-4 text-xs text-zinc-500 flex-row justify-between items-center">
