@@ -45,7 +45,7 @@ func StartTweetScheduler() error {
 		for _, tweet := range tweets {
 			if !tweet.Done {
 				// tweet is not done
-				if tweet.SendAt.After(time.Now()) || tweet.SendAt.Equal(time.Now()) {
+				if tweet.SendAt.Before(time.Now()) || tweet.SendAt.Equal(time.Now()) {
 					// Send a Tweet
 					if stweet, resp, err := client.Statuses.Update(tweet.Content, nil); err == nil {
 						logs.Info("tweet sent: ", stweet)
