@@ -2,6 +2,8 @@ package models
 
 import (
 	"encoding/json"
+	"errors"
+	"strings"
 	"time"
 	"titd/modules/global"
 
@@ -32,6 +34,12 @@ func (t *Tweet) Insert() error {
 	t.Created = time.Now()
 	t.Updated = time.Now()
 	t.Id = uuid.NewString()
+
+	t.Content = strings.TrimSpace(t.Content)
+
+	if len(t.Content) > 280 {
+		return errors.New("content too big")
+	}
 
 	val, err := json.Marshal(*t)
 	if err != nil {

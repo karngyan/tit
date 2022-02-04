@@ -4,8 +4,6 @@ import (
 	"encoding/json"
 	"time"
 	"titd/modules/global"
-
-	"github.com/google/uuid"
 )
 
 type TwitterConfigsResponse struct {
@@ -14,13 +12,15 @@ type TwitterConfigsResponse struct {
 
 // TwitterConfig - can be multiple
 type TwitterConfig struct {
-	Id           string    `json:"id"`
-	ApiKey       string    `json:"apiKey"`
-	ApiKeySecret string    `json:"apiKeySecret"`
-	BearerToken  string    `json:"bearerToken"`
-	Default      bool      `json:"default"`
-	Created      time.Time `json:"created"` // when was it created
-	Updated      time.Time `json:"updated"` // when was it last updated
+	Id                string    `json:"id"`
+	ApiKey            string    `json:"apiKey"`
+	ApiKeySecret      string    `json:"apiKeySecret"`
+	BearerToken       string    `json:"bearerToken"`
+	AccessToken       string    `json:"accessToken"`
+	AccessTokenSecret string    `json:"accessTokenSecret"`
+	Default           bool      `json:"default"`
+	Created           time.Time `json:"created"` // when was it created
+	Updated           time.Time `json:"updated"` // when was it last updated
 }
 
 // Insert - last inserted config automatically becomes default
@@ -29,7 +29,8 @@ func (t *TwitterConfig) Insert() error {
 
 	t.Created = time.Now()
 	t.Updated = time.Now()
-	t.Id = uuid.NewString()
+	//t.Id = uuid.NewString()
+	t.Id = "fixed_id_no_support_for_multiple_config"
 	t.Default = true
 
 	val, err := json.Marshal(*t)
